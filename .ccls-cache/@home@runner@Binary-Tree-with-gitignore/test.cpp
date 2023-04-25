@@ -4,7 +4,7 @@
 #include <vector>
 #include <random>
 
-inline void BinaryTreeTester::test(const int size)
+void BinaryTreeTester::test(const int size)
 {
     m_maxSize = size;
     addAndCount();
@@ -15,17 +15,17 @@ inline void BinaryTreeTester::test(const int size)
     height();
 }
 
-inline BinaryTree* BinaryTreeTester::allocateTree()
+BinaryTree* BinaryTreeTester::allocateTree()
 {
     return new BinaryTree;
 }
  
-inline void BinaryTreeTester::deallocateTree(BinaryTree * tree)
+void BinaryTreeTester::deallocateTree(BinaryTree * tree)
 {
     delete tree;
 }
 
-inline void BinaryTreeTester::addAndCount()
+void BinaryTreeTester::addAndCount()
 {
   BinaryTree* tree = allocateTree();
     check_addAndCount(*tree, 0);
@@ -36,13 +36,13 @@ inline void BinaryTreeTester::addAndCount()
     }
     deallocateTree(tree);
 }
-inline void BinaryTreeTester::check_addAndCount(const BinaryTree &tree, const int size)
+void BinaryTreeTester::check_addAndCount(const BinaryTree &tree, const int size)
 {
     assert(tree.Count()== size);
 }
 
 
-inline void BinaryTreeTester::destructor()
+void BinaryTreeTester::destructor()
 {
     for (int j = 0; j < 1000; ++j)
     {
@@ -54,7 +54,7 @@ inline void BinaryTreeTester::destructor()
     }
 }
 
-inline void BinaryTreeTester::clear()
+void BinaryTreeTester::clear()
 {
     BinaryTree* tree = allocateTree();
     tree->deleteAllTree();
@@ -69,13 +69,13 @@ inline void BinaryTreeTester::clear()
     check_clear(*tree, 0);
     deallocateTree(tree);
 }
-inline void BinaryTreeTester::check_clear(const BinaryTree& tree, const int size)
+void BinaryTreeTester::check_clear(const BinaryTree& tree, const int size)
 {
     assert(tree.Count() == size);
 }
 
 
-inline void BinaryTreeTester::assign()
+void BinaryTreeTester::assign()
 {
     BinaryTree *tree1 = allocateTree();
     for (int i = 0; i < m_maxSize; ++i) {
@@ -97,7 +97,7 @@ inline void BinaryTreeTester::assign()
     deallocateTree(tree2);
 }
 
-inline void BinaryTreeTester::check_assign(const std::vector<int> keys1, const std::vector<int> keys2)
+void BinaryTreeTester::check_assign(const std::vector<int> keys1, const std::vector<int> keys2)
 {
     assert(keys1.size() == keys2.size());
     for (unsigned int i = 0; i < keys1.size(); i++)
@@ -106,7 +106,7 @@ inline void BinaryTreeTester::check_assign(const std::vector<int> keys1, const s
     }
 }
 
-inline void BinaryTreeTester::height()
+void BinaryTreeTester::height()
 {
     height_trivialCases();
     height_longOnlyLeftSubtree();
@@ -115,19 +115,19 @@ inline void BinaryTreeTester::height()
     height_longRandomZigzagSubtrees();
 }
 
-inline void BinaryTreeTester::check_height(const BinaryTree &tree, const int height)
+void BinaryTreeTester::check_height(const BinaryTree &tree, const int height)
 {
     assert(tree.height() == height);
 }
 
-inline void BinaryTreeTester::height_trivialCases()
+void BinaryTreeTester::height_trivialCases()
 {
     BinaryTree tree;
     check_height(tree, 0);
     tree.addNode(0);
     check_height(tree, 1);
 }
-inline void BinaryTreeTester::height_longOnlyLeftSubtree()
+void BinaryTreeTester::height_longOnlyLeftSubtree()
 {
     BinaryTree longTree;
     longTree.addNode(0);
@@ -138,7 +138,7 @@ inline void BinaryTreeTester::height_longOnlyLeftSubtree()
         check_height(longTree, i + 1);
     }
 }
-inline void BinaryTreeTester::height_longOnlyRightSubtree()
+void BinaryTreeTester::height_longOnlyRightSubtree()
 {
     BinaryTree longTree;
     longTree.addNode(0);
@@ -149,7 +149,7 @@ inline void BinaryTreeTester::height_longOnlyRightSubtree()
         check_height(longTree, i + 1);
     }
 }
-inline void BinaryTreeTester::height_longOnlyLeftAndRightSubtrees()
+void BinaryTreeTester::height_longOnlyLeftAndRightSubtrees()
 {
     BinaryTree longTree;
     longTree.addNode(0);
@@ -166,7 +166,7 @@ inline void BinaryTreeTester::height_longOnlyLeftAndRightSubtrees()
         check_height(longTree, i + 1);
     }
 }
-inline void BinaryTreeTester::height_longRandomZigzagSubtrees()
+void BinaryTreeTester::height_longRandomZigzagSubtrees()
 {
     BinaryTree longTree;
     longTree.addNode(0);
@@ -205,7 +205,7 @@ inline void BinaryTreeTester::height_longRandomZigzagSubtrees()
     }
 }
 
-inline void BinaryTreeTester::remove()
+void BinaryTreeTester::remove()
 {
     int invalidKey = -1;
     std::vector<int> nodeKeys;
@@ -249,7 +249,7 @@ inline void BinaryTreeTester::remove()
     deallocateTree(tree);
 }
  
-inline void BinaryTreeTester::check_remove(const BinaryTree &tree, const int size)
+void BinaryTreeTester::check_remove(const BinaryTree &tree, const int size)
 {
     assert(tree.Count() == size);
 }

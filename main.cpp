@@ -1,16 +1,12 @@
-#include <iostream>
-#include <string>
-#include <vector>
-#include <algorithm>
-#include "BinaryTree.cpp"
-#include "test.cpp"
+#include "test.h"
+
 int main()  
 {
  int pupmax , pupmin;
   BinaryTree tree;
   for(int i=10;i>2;i--)
     tree.addNode(i);
-tree.deleteNode(10);
+//tree.deleteNode(10);
 tree.PrintTree(2,3);
  // pup = tree.Count(tree.getRoot());
   //tree.PrintLeaves(tree.getRoot());

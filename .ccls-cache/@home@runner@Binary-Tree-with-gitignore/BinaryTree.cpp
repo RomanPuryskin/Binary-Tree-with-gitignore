@@ -243,8 +243,9 @@ bool BinaryTree::balancedTree() { return balancedTree(m_root); }
 //--------------------------------------------------//
 
 //----------------Нахождение родителя-------------------//
-Node *BinaryTree::findParent(Node *node, Node *temp) {
-  if (m_root == node || temp == nullptr)
+Node *BinaryTree::findParent(Node *node, Node *temp) 
+{
+  if ( node == m_root || temp == nullptr)
     return nullptr;
 
   if (temp->GetLeft() == node || temp->GetRight() == node)
@@ -260,18 +261,15 @@ Node *BinaryTree::findParent(Node *node, Node *temp) {
 //------------------------------------------------------//
 
 //-------------------Удаление узла----------------------//
-void BinaryTree::deleteNode(Node *node) {
-  //попали корень
-  if (node == m_root) {
-    delete m_root;
-    m_root = nullptr;
-    return;
-  }
+void BinaryTree::deleteNode(Node *node) 
+{
 
   Node *parent = findParent(node, m_root);
-  if (parent == nullptr)
+  if (parent == nullptr && node != m_root)
+  {
     return;
-
+  }
+  
   Node *replace = nullptr;
 
   if (node->GetLeft() == nullptr && node->GetRight() == nullptr)
@@ -282,25 +280,34 @@ void BinaryTree::deleteNode(Node *node) {
     replace = node->GetLeft();
 
   else {
-    Node *minTemp = node->GetRight();
-    while (minTemp->GetLeft() != nullptr)
-      minTemp = minTemp->GetLeft();
-    replace = minTemp;
+    Node *temp = node->GetRight();
+    while (temp->GetLeft() != nullptr)
+      temp = temp->GetLeft();
+    replace = temp;
 
     //найдем родителя у узла для замены
-    Node *minParent = findParent(minTemp, m_root);
-    if (minParent != node) {
-      minParent->SetLeft(replace->GetRight());
+    Node *tempParent = findParent(temp, m_root);
+    if (tempParent != node) {
+      tempParent->SetLeft(replace->GetRight());
       replace->SetRight(node->GetRight());
     }
     replace->SetLeft(node->GetLeft());
   }
   //на место удаляемого узла вставляем replace узел
-  if (parent->GetLeft() == node)
-    parent->SetLeft(replace);
-  else if (parent->GetRight() == node)
-    parent->SetRight(replace);
-  delete node;
+  if( parent != nullptr)
+  { 
+    if (parent->GetLeft() == node)
+      parent->SetLeft(replace);
+    else
+      parent->SetRight(replace);
+    delete node;
+  }
+  else
+  {
+    delete m_root;
+    m_root = replace;
+  }
+
 }
 
 bool BinaryTree::deleteNode(int key) {
